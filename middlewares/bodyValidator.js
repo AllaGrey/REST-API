@@ -1,25 +1,25 @@
 const Joi = require('joi');
-const HttpError = require('../helpers/HttpError');
+const { HttpError } = require('../helpers');
+const { constants } = require('../helpers')
 
-const phoneRegExp = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/;
-const emailRegExp = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/;
 
 const validationSchema = Joi.object({
   name: Joi.string().min(3).max(30).messages({
       'any.required': 'missing required name field',
     }).required(),
-  email: Joi.string().min(3).max(30).pattern(new RegExp(emailRegExp)).messages({
+  email: Joi.string().min(3).max(30).pattern(new RegExp(constants.emailRegExp)).messages({
       'any.required': 'missing required email field',
     }).required(),
-  phone: Joi.string().min(3).max(30).pattern(new RegExp(phoneRegExp)).messages({
+  phone: Joi.string().min(3).max(30).pattern(new RegExp(constants.phoneRegExp)).messages({
       'any.required': 'missing required phone field',
-    }).required(),
+  }).required(),
+  favorite: Joi.boolean().required(),
 });
 
-const validation = () => {
+const bodyValidation = () => {
   const validationFunc = (req, res, next) => {
     const { body } = req;
-
+    console.log('this is Joi');
     if (Object.keys(body).length === 0) {
       next(HttpError(400, 'missing fields'));
     }
@@ -34,5 +34,5 @@ const validation = () => {
 }
 
 module.exports = {
-    validation
+    bodyValidation
 }
