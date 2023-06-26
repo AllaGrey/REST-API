@@ -1,5 +1,10 @@
-const Contact = require('./contactModel');
+const { Contact, validationSchema } = require('./contactModel');
+const {User, userSchemas} = require('./userModel');
+
 
 module.exports = {
-    Contact
+    Contact,
+    validationSchema,
+    User,
+    userSchemas,
 }
