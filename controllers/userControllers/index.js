@@ -4,6 +4,8 @@ const  login  = require('./loginController');
 const getCurrentData = require('./getCurrentDataController');
 const subscriptionUpdate = require('./subscriptionController');
 const updateAvatar = require('./updateAvatarController');
+const verificationEmail = require('./verificationEmailController');
+const resendVerificationEmail = require('./resendVerificationEmailController');
 
 
 module.exports = {
@@ -13,4 +15,6 @@ module.exports = {
     getCurrentData,
     subscriptionUpdate,
     updateAvatar,
+    verificationEmail,
+    resendVerificationEmail
 }
